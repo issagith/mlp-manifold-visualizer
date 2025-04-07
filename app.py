@@ -1,15 +1,11 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.decomposition import PCA
 from sklearn.datasets import make_moons, make_circles, make_classification, make_swiss_roll
-import seaborn as sns
-from sklearn.model_selection import train_test_split
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
