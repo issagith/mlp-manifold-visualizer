@@ -23,8 +23,7 @@ st.set_page_config(page_title="Visualizing MLP Transformations", layout="wide")
 # Application title and description
 st.title("Visualizing MLP Transformations")
 st.markdown("""
-This application allows you to visualize how a neural network (MLP) transforms the data space across its layers, 
-illustrating the "Manifold Hypothesis" which suggests that real-world data lies on lower-dimensional manifolds within the input space.
+This application allows you to visualize how a neural network (MLP) transforms the data space across its layers.
 """)
 
 # MLP class with hooks to capture activations
@@ -275,20 +274,16 @@ if train_button:
     st.sidebar.info("Training in progress...")
     trained_model, losses = train_model(model, X, y, epochs, batch_size, learning_rate)
     st.session_state["trained_model"] = trained_model
-    fig_loss = px.line(y=losses, x=list(range(len(losses))),
-                       labels={"y": "Loss", "x": "Epoch"},
-                       title="Loss During Training")
+
+    # Display training loss
+    fig_loss = px.line(
+        y=losses, 
+        x=list(range(len(losses))),
+        labels={"y": "Loss", "x": "Epoch"},
+        title="Loss During Training"
+    )
     st.plotly_chart(fig_loss)
     st.success("Training completed! Visualizations have been updated.")
-
-st.sidebar.markdown("---")
-st.sidebar.markdown("""
-### About the Manifold Hypothesis
-
-The "Manifold Hypothesis" is a fundamental concept in deep learning which postulates that natural, high-dimensional data 
-lies approximately on a lower-dimensional manifold within the input space.
-
-Neural networks perform a series of transformations to "unfold" these complex manifolds, making the data linearly separable.
-
-This application allows you to visualize this process in real time across the different layers of an MLP.
-""")
+    
+    # force a rerun to update the visualizations
+    st.rerun()
